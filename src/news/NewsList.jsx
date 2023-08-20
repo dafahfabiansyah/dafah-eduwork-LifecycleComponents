@@ -2,6 +2,7 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import NewsCard from './NewsCard';
+import axios from 'axios';
 
 class NewsList extends React.Component {
   constructor(props) {
@@ -12,9 +13,9 @@ class NewsList extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=cabca71a01f7407ab8ec2319c74ff9a8')
-      .then((response) => response.json())
-      .then((data) => this.setState({ newsData: data.articles }))
+    axios
+      .get('https://newsapi.org/v2/top-headlines?country=us&apiKey=cabca71a01f7407ab8ec2319c74ff9a8')
+      .then((response) => this.setState({ newsData: response.data.articles }))
       .catch((error) => console.error(error));
   }
 
